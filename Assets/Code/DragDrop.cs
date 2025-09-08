@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class DragDrop : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        Vector2 mousePosition = Input.mousePosition;
-        Vector2 mousePositionInWorld = Camera.main.ScreenToWorldPoint(mousePosition);
+    private Vector2 offset;
+    private bool dragging = false;
 
-        if (Input.GetMouseButtonDown(0))
+    void OnMouseDown()
+    {
+        dragging = true;
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //ingredient location - mouse location (in world)
+    }
+
+    void OnMouseDrag()
+    {
+        if (dragging)
         {
-            //move ingredient to where mouse is
-            this.transform.position = mousePositionInWorld;
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = mousePosition + offset;
         }
+    }
+
+    void OnMouseUp()
+    {
+        dragging = false;
     }
 }
