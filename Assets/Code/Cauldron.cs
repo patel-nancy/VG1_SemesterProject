@@ -6,6 +6,7 @@ using UnityEngine;
 public class Cauldron : MonoBehaviour
 {
     public Transform cauldronCenter;
+    public Drag spoon;
     
     public List<IngredientName> ingredients = new List<IngredientName>();
     
@@ -22,13 +23,16 @@ public class Cauldron : MonoBehaviour
 
     void Update()
     {
-        Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 directionFromCauldronToMouse = mousePositionInWorld - transform.position;
+        if (spoon.dragging)
+        {
+            Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector3 directionFromCauldronToMouse = mousePositionInWorld - transform.position;
         
-        float radiansToMouse = Mathf.Atan2(directionFromCauldronToMouse.y, directionFromCauldronToMouse.x);
-        float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
+            float radiansToMouse = Mathf.Atan2(directionFromCauldronToMouse.y, directionFromCauldronToMouse.x);
+            float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
         
-        cauldronCenter.rotation = Quaternion.Euler(0, 0, angleToMouse);
+            cauldronCenter.rotation = Quaternion.Euler(0, 0, angleToMouse);
+        }
     }
     
 }
