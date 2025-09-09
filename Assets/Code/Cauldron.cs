@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour
 {
+    public Transform cauldronCenter;
+    
     public List<IngredientName> ingredients = new List<IngredientName>();
     
     void OnTriggerEnter2D(Collider2D other)
@@ -17,4 +19,16 @@ public class Cauldron : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    void Update()
+    {
+        Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 directionFromCauldronToMouse = mousePositionInWorld - transform.position;
+        
+        float radiansToMouse = Mathf.Atan2(directionFromCauldronToMouse.y, directionFromCauldronToMouse.x);
+        float angleToMouse = radiansToMouse * Mathf.Rad2Deg;
+        
+        cauldronCenter.rotation = Quaternion.Euler(0, 0, angleToMouse);
+    }
+    
 }

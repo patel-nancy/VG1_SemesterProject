@@ -16,7 +16,7 @@ public class Recipe : MonoBehaviour
             return false;
         }
 
-    for (int i = 0; i < pickedIngredients.Count; i++)
+        for (int i = 0; i < pickedIngredients.Count; i++)
         {
             if (pickedIngredients[i] != ingredients[i]) //order matters
             {
