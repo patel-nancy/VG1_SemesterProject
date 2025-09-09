@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragDrop : MonoBehaviour
+public enum IngredientName { Frog, Bat, Eye }
+public class Ingredient : MonoBehaviour
 {
     private Vector2 offset;
     private bool dragging = false;
-
+    public IngredientName name;
+    
     void OnMouseDown()
     {
         dragging = true;

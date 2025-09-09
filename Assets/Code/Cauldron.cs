@@ -5,11 +5,15 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<IngredientName> ingredients = new List<IngredientName>();
+    
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Ingredient")) //TODO: do we want to do this by tag?
+        Ingredient ingredient = other.GetComponent<Ingredient>();
+        if (ingredient != null)
         {
+            ingredients.Add(ingredient.name);
+            Debug.Log(ingredient.name);
             Destroy(other.gameObject);
         }
     }
