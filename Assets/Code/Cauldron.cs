@@ -10,10 +10,11 @@ public class Cauldron : MonoBehaviour
     
     public List<IngredientName> ingredients = new List<IngredientName>();
     
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         Ingredient ingredient = other.GetComponent<Ingredient>();
-        if (ingredient != null)
+        Drag ingredientDrag = other.GetComponent<Drag>();
+        if (ingredient != null && ingredientDrag != null && !ingredientDrag.dragging)
         {
             ingredients.Add(ingredient.name);
             Debug.Log(ingredient.name);
