@@ -10,7 +10,6 @@ public class Fire : MonoBehaviour
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-
         sr.enabled = lit;
     }
 
