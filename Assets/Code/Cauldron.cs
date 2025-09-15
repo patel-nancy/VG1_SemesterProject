@@ -10,7 +10,7 @@ public class Cauldron : MonoBehaviour
     
     public List<IngredientName> ingredients = new List<IngredientName>();
     
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
 
         Ingredient ingredient = other.gameObject.GetComponent<Ingredient>();
