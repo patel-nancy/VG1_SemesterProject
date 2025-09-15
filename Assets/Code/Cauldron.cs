@@ -10,12 +10,13 @@ public class Cauldron : MonoBehaviour
     
     public List<IngredientName> ingredients = new List<IngredientName>();
     
-    void OnTriggerStay2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("collide with cauldron");
-        Ingredient ingredient = other.GetComponent<Ingredient>();
-        Drag ingredientDrag = other.GetComponent<Drag>();
-        if (ingredient != null && ingredientDrag != null && !ingredientDrag.dragging)
+
+        Ingredient ingredient = other.gameObject.GetComponent<Ingredient>();
+        Drag drag = other.gameObject.GetComponent<Drag>();
+        
+        if (ingredient && drag && !drag.dragging)
         {
             ingredients.Add(ingredient.name);
             Debug.Log(ingredient.name);

@@ -11,7 +11,7 @@ public class Drag : MonoBehaviour
     private void OnMouseDown()
     {
         dragging = true;
-        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //ingredient location - mouse location (in world)
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //sprite location - mouse location (in world)
     }
 
     private void OnMouseUp()
