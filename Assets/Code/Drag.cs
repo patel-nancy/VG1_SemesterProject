@@ -8,7 +8,7 @@ public class Drag : MonoBehaviour
     public Vector2 offset;
     public bool dragging = false;
     
-    void OnMouseDown()
+    private void OnMouseDown()
     {
         dragging = true;
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //ingredient location - mouse location (in world)
