@@ -18,12 +18,22 @@ static class IngredientNameExtensions
 public class Ingredient : MonoBehaviour
 {
     public IngredientName name;
-    public IngredientName counterName;
+    private IngredientName counterName;
+    public Drag ingredientDrag;
     
     void Start()
     {
         //the counter ingredient is the next one in the enum list
         //e.g. if name = Frog, counter = Bat
         counterName = name.Next(); 
+    }
+
+    void Update()
+    {
+        if (ingredientDrag.dragging)
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = mousePosition + ingredientDrag.offset;
+        }
     }
 }

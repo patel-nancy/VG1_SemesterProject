@@ -6,12 +6,13 @@ using UnityEngine;
 public class Cauldron : MonoBehaviour
 {
     public Transform cauldronCenter;
-    public Drag spoon;
+    public Drag spoonDrag;
     
     public List<IngredientName> ingredients = new List<IngredientName>();
     
     void OnTriggerStay2D(Collider2D other)
     {
+        Debug.Log("collide with cauldron");
         Ingredient ingredient = other.GetComponent<Ingredient>();
         Drag ingredientDrag = other.GetComponent<Drag>();
         if (ingredient != null && ingredientDrag != null && !ingredientDrag.dragging)
@@ -24,7 +25,7 @@ public class Cauldron : MonoBehaviour
 
     void Update()
     {
-        if (spoon.dragging)
+        if (spoonDrag.dragging)
         {
             Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector3 directionFromCauldronToMouse = mousePositionInWorld - transform.position;

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Bellows : MonoBehaviour
 {
-    public Drag bellows;
+    public Drag bellowsDrag;
     public float stopYPosition = -10f;
    
     void Update()
     {
-        if (bellows.dragging)
+        if (bellowsDrag.dragging)
         {
-            Vector3 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector3 currentPositionInWorld = transform.position;
-            transform.position = new Vector3(currentPositionInWorld.x, mousePositionInWorld.y, 0);
+            Vector2 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 currentPositionInWorld = transform.position;
+            transform.position = new Vector3(currentPositionInWorld.x, mousePositionInWorld.y + bellowsDrag.offset.y, 0);
             
             //TODO: prevent from going too far down
         }

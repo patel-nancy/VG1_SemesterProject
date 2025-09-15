@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    private Vector2 offset;
+    public Vector2 offset;
     public bool dragging = false;
     
     void OnMouseDown()
@@ -18,13 +18,5 @@ public class Drag : MonoBehaviour
     {
         dragging = false;
     }
-
-    void OnMouseDrag()
-    {
-        if (gameObject.GetComponent<Ingredient>())
-        {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePosition + offset;
-        }
-    }
+    
 }
