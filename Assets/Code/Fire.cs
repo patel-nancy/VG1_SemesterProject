@@ -6,7 +6,7 @@ public class Fire : MonoBehaviour
 {
     public bool lit = false;   // whether the fire is on
     private SpriteRenderer sr; // cache the sprite renderer
-    private float duration = 0f;
+    public float duration = 0f;
 
     void Start()
     {

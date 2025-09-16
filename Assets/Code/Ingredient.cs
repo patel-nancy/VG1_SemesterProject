@@ -3,37 +3,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum IngredientName { Frog, Bat, Eye, Newt } //general ingredients to be used 
+public enum IngredientName { Frog, Bat, Eye } //general ingredients to be used 
+public enum CounterIngredientName { Toad, Squirrel, Hair} //counters for general ingredients
 
-static class IngredientNameExtensions
-{
-    public static IngredientName Next(this IngredientName name)
-    {
-        IngredientName[] values = (IngredientName[])Enum.GetValues(typeof(IngredientName)); //turn enum into array
-        int index = Array.IndexOf(values, name); //find idx of ingredient in array
-        int nextIndex = (index + 1) % values.Length; //get next idx (if at the end of the array, loop to the beginning)
-        return values[nextIndex]; 
-    }
-}
 public class Ingredient : MonoBehaviour
 {
     public IngredientName name;
-    private IngredientName counterName;
-    public Drag ingredientDrag;
+    private CounterIngredientName counterName;
+    
+    private Vector2 offset;
     
     void Start()
     {
-        //the counter ingredient is the next one in the enum list
-        //e.g. if name = Frog, counter = Bat
-        counterName = name.Next(); 
+        CounterIngredientName[] counterIngredients = (CounterIngredientName[])Enum.GetValues(typeof(CounterIngredientName));
+        counterName = counterIngredients[(int)name];
+    }
+    private void OnMouseDown()
+    {
+        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
-    void Update()
+    private void OnMouseDrag()
     {
-        if (ingredientDrag.dragging)
-        {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePosition + ingredientDrag.offset;
-        }
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = mousePosition + offset; 
     }
 }
