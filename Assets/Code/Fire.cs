@@ -7,6 +7,7 @@ public class Fire : MonoBehaviour
     public bool lit = false;   // whether the fire is on
     private SpriteRenderer sr; // cache the sprite renderer
     public float duration = 0f;
+    public PotionMakingSession session;
 
     void Start()
     {
@@ -28,8 +29,10 @@ public class Fire : MonoBehaviour
 
             if (!lit)
             {
+                session.playerActions.Add(new FireAction(this));
                 Debug.Log(duration);
                 duration = 0f;
+                
             }
         }
     }

@@ -447,6 +447,7 @@ MonoBehaviour:
   clockwise: 0
   rotations: 0
   cauldronCenter: {fileID: 1483558574}
+  session: {fileID: 423004782}
 --- !u!1 &423004781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lit: 0
   duration: 0
+  session: {fileID: 423004782}
 --- !u!1 &1714037731
 GameObject:
   m_ObjectHideFlags: 0
