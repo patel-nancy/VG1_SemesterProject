@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 240536072}
   - component: {fileID: 240536069}
   - component: {fileID: 240536067}
-  - component: {fileID: 240536066}
   m_Layer: 0
   m_Name: ingredients_0
   m_TagString: Untagged
@@ -143,20 +142,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &240536066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 240536065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b341fb2b4b930ce448e87ae7c289cbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  dragging: 0
 --- !u!114 &240536067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,7 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 0
-  ingredientDrag: {fileID: 240536066}
 --- !u!50 &240536069
 Rigidbody2D:
   serializedVersion: 4
@@ -328,7 +312,6 @@ GameObject:
   - component: {fileID: 246726602}
   - component: {fileID: 246726601}
   - component: {fileID: 246726600}
-  - component: {fileID: 246726603}
   - component: {fileID: 246726604}
   m_Layer: 0
   m_Name: spoon
@@ -449,20 +432,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1483558574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &246726603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 246726598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b341fb2b4b930ce448e87ae7c289cbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  dragging: 0
 --- !u!114 &246726604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +446,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clockwise: 0
   rotations: 0
-  spoonDrag: {fileID: 246726603}
   cauldronCenter: {fileID: 1483558574}
 --- !u!1 &423004781
 GameObject:
@@ -833,7 +801,6 @@ GameObject:
   - component: {fileID: 799734340}
   - component: {fileID: 799734339}
   - component: {fileID: 799734344}
-  - component: {fileID: 799734343}
   m_Layer: 0
   m_Name: ingredients_1
   m_TagString: Untagged
@@ -970,20 +937,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &799734343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 799734338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b341fb2b4b930ce448e87ae7c289cbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  dragging: 0
 --- !u!114 &799734344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,7 +950,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 1
-  ingredientDrag: {fileID: 799734343}
 --- !u!1 &1384193297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +961,6 @@ GameObject:
   - component: {fileID: 1384193299}
   - component: {fileID: 1384193298}
   - component: {fileID: 1384193301}
-  - component: {fileID: 1384193300}
   - component: {fileID: 1384193302}
   m_Layer: 0
   m_Name: bellows
@@ -1085,20 +1036,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1384193300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1384193297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b341fb2b4b930ce448e87ae7c289cbc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  dragging: 0
 --- !u!60 &1384193301
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1194,7 +1131,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9a363e86ca17e40b2b318a04ad7037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bellowsDrag: {fileID: 1384193300}
 --- !u!1 &1483558573
 GameObject:
   m_ObjectHideFlags: 0
