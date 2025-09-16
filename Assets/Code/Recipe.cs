@@ -7,18 +7,19 @@ public class Recipe : MonoBehaviour
 {
     public String name;
     public String purpose;
-    public List<IngredientName> ingredients = new List<IngredientName>();
+    public List<Action> actions = new List<Action>();
 
-    public bool CheckRecipe(List<IngredientName> pickedIngredients)
+    public bool CheckRecipe(List<Action> playerActions)
     {
-        if (ingredients.Count != pickedIngredients.Count)
+        if (actions.Count != playerActions.Count)
         {
             return false;
         }
 
-        for (int i = 0; i < pickedIngredients.Count; i++)
+        for (int i = 0; i < playerActions.Count; i++)
         {
-            if (pickedIngredients[i] != ingredients[i]) //order matters
+            //TODO: some sort of IsEqual() 
+            if (playerActions[i] != actions[i]) //order matters
             {
                 return false;
             }
