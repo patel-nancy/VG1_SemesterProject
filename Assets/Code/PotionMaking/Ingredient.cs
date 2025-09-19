@@ -10,6 +10,7 @@ public class Ingredient : MonoBehaviour
 {
     public IngredientName name;
     private CounterIngredientName counterName;
+    private bool dragging = false;
     
     private Vector2 offset;
     
@@ -20,6 +21,7 @@ public class Ingredient : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        dragging = true;
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
     }
 
@@ -27,5 +29,26 @@ public class Ingredient : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = mousePosition + offset; 
+    }
+
+    private void OnMouseUp()
+    {
+        dragging = false;
+    }
+
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (dragging)
+            return;
+
+        Cauldron cauldron = other.gameObject.GetComponent<Cauldron>();
+        if (cauldron)
+        {
+            cauldron.session.playerActions.Add(new AddIngredientAction(this)); 
+            //TODO: need to see if this ingredient is a counter
+            
+            Debug.Log(name);
+            Destroy(this.gameObject);
+        }
     }
 }
