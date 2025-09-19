@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipe: {fileID: 0}
+  ratPrefab: {fileID: 1054705999149564245, guid: c3128aee768dde34493d820c62736083, type: 3}
 --- !u!4 &423004783
 Transform:
   m_ObjectHideFlags: 0
