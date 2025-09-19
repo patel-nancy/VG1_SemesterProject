@@ -6,7 +6,7 @@ using UnityEngine;
 public class Bellows : MonoBehaviour
 {
     private Vector2 offset;
-    private float stopYPosition = -0.5f;
+    private float stopYPosition = -0f;
 
     private void OnMouseDown()
     {
