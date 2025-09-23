@@ -14,9 +14,8 @@ public class Rat : MonoBehaviour
 
     void Update()
     {
-        float going = moveLeftOrUp ? 1 : -1;
         Vector2 directionVector = knocksShelf ? Vector2.left : Vector2.up;
-        
+        float going = moveLeftOrUp ? 1 : -1;
         transform.Translate(directionVector * going * speed * Time.deltaTime);
 
         // reaches edge of shelf or top of bellows, then turns around

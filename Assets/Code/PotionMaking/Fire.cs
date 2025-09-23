@@ -10,28 +10,22 @@ public class Fire : MonoBehaviour
 
     public float duration = 0f;
     private SpriteRenderer sr; // cache the sprite renderer
-    public PotionMakingSession session;
 
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
-        sr.enabled = duration > 0;
     }
 
     void Update()
     {
-        if (duration > 0) {
-            duration -= Time.deltaTime;
-            sr.enabled = duration > 0;
-
+        sr.enabled = duration > 0;
+        if (duration != 0 && duration < cappedDuration)
+        {
+            duration += Time.deltaTime;
+            
             float t = Mathf.Clamp01(duration / cappedDuration);
             float scale = Mathf.Lerp(baseScale, maxScale, t);
             transform.localScale = new Vector3(scale, scale, scale);
-
-            if (duration <= 0) {
-                duration = 0f;
-                session.playerActions.Add(new FireAction(this));
-            }
         }
     }
 }
