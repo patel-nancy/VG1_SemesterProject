@@ -43,20 +43,23 @@ public class PotionMakingSession : MonoBehaviour
 
    public void PotionDone()
    {
-      //TODO: refactor s.t. Ingredient is plain C# and IngredientDrag takes care of dragging
       
-      List<Action> actions = new List<Action>();
+      // List<Action> actions = new List<Action>();
       // Ingredient i1 = new Ingredient(IngredientName.Bat);
       // Ingredient i2 = new Ingredient(IngredientName.Frog);
       // actions.Add(new AddIngredientAction(i1));
       // actions.Add(new AddIngredientAction(i2));
+      // Stir s1 = new Stir(360f);
+      // actions.Add(new StirCauldronAction(s1));
+      // Fire f1 = new Fire(3f);
+      // actions.Add(new FireAction(f1));
       
       // currRecipe = new Recipe(
       //       "fly",
       //       "fly",
       //       actions
       //    );
-      //
+      
       //check Recipe
       Debug.Log("Recipe Matches:" + currRecipe.CheckRecipe(currPlayerActions));
    }

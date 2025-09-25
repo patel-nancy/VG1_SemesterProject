@@ -311,7 +311,7 @@ GameObject:
   - component: {fileID: 246726602}
   - component: {fileID: 246726601}
   - component: {fileID: 246726600}
-  - component: {fileID: 246726604}
+  - component: {fileID: 246726603}
   m_Layer: 0
   m_Name: spoon
   m_TagString: Untagged
@@ -431,7 +431,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1483558574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &246726604
+--- !u!114 &246726603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -440,11 +440,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 246726598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fedd39ebcb98a940adc99f143b6e45d, type: 3}
+  m_Script: {fileID: 11500000, guid: 231212ddf11ce5f46a80080185f54d96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotations: 0
-  clockwise: 0
   cauldronCenter: {fileID: 1483558574}
   session: {fileID: 423004782}
 --- !u!1 &250540145
@@ -1269,9 +1267,9 @@ GameObject:
   - component: {fileID: 1384193299}
   - component: {fileID: 1384193298}
   - component: {fileID: 1384193301}
-  - component: {fileID: 1384193302}
   - component: {fileID: 1384193303}
   - component: {fileID: 1384193304}
+  - component: {fileID: 1384193302}
   m_Layer: 0
   m_Name: rope
   m_TagString: Untagged
@@ -1441,7 +1439,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac9a363e86ca17e40b2b318a04ad7037, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fire: {fileID: 1528866203}
+  fireHold: {fileID: 1528866203}
   session: {fileID: 423004782}
 --- !u!50 &1384193303
 Rigidbody2D:
@@ -1617,13 +1615,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1528866200}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07c5727c5cdcbd815ba3340302288ab3, type: 3}
+  m_Script: {fileID: 11500000, guid: 0d67bd41422dba3418dcd2d4a43a6785, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseScale: 1
-  maxScale: 2
-  cappedDuration: 15
-  duration: 0
 --- !u!1 &1714037731
 GameObject:
   m_ObjectHideFlags: 0

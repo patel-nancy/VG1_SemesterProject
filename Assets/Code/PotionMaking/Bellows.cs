@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Bellows : MonoBehaviour
 {
-    public Fire fire;
+    public FireHold fireHold;
 
     private Vector2 offset;
     private float stopYPosition = -0f;
     public PotionMakingSession session;
-
+    
     private void OnMouseDrag()
     {
         Vector2 mousePositionInWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -21,25 +21,14 @@ public class Bellows : MonoBehaviour
     private void OnMouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //sprite location - mouse location (in world)
-        
-        fire.duration += Time.deltaTime;
-        if (fire.duration > fire.cappedDuration)
-        {
-            Debug.Log("Fire duration: " + fire.duration);
-            session.currPlayerActions.Add(new FireAction(fire));
-            fire.duration = 0;
-        }
+        fireHold.fire.duration += Time.deltaTime;
     }
 
     void OnMouseUp()
     {
-        //leaves trigger AND wasn't just turned off because it reached cappedDuration
-        if (fire.duration != 0)
-        {
-            Debug.Log("Fire duration: " + fire.duration);
-            fire.duration = 0;
-            session.currPlayerActions.Add(new FireAction(fire));
-        }
+        Debug.Log("Fire duration: " + fireHold.fire.duration);
+        fireHold.fire.duration = 0;
+        session.currPlayerActions.Add(new FireAction(fireHold.fire));
     }
 
     //rat can trigger bellows if going up

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StirCauldronAction : Action
 {
-    public Stir stir;
+    private Stir stir;
 
     public StirCauldronAction(Stir stir)
     {
@@ -14,7 +14,7 @@ public class StirCauldronAction : Action
     
     public override String description()
     {
-        return $"Stirred clockwise: {stir.clockwise}, Rotations: {stir.rotations}";
+        return $"Rotations: {stir.rotations}";
     }
 
     public override bool Equals(Action action)
