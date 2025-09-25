@@ -15,4 +15,13 @@ public class FireAction : Action
     {
         return $"Fire on for: {fire.duration}";
     }
+    
+    public override bool Equals(Action action)
+    {
+        if (action is FireAction other)
+        {
+            return fire.Equals(other.fire);
+        }
+        return false;
+    }
 }

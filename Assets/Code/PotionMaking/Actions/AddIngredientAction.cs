@@ -16,4 +16,14 @@ public class AddIngredientAction : Action
     {
         return $"Add {ingredient.name}";
     }
+
+    public override bool Equals(Action action)
+    {
+        if (action is AddIngredientAction other)
+        {
+            return ingredient.Equals(other.ingredient);
+        }
+        return false;
+        
+    }
 }

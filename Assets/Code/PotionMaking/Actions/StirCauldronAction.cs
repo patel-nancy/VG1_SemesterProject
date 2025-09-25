@@ -16,5 +16,14 @@ public class StirCauldronAction : Action
     {
         return $"Stirred clockwise: {stir.clockwise}, Rotations: {stir.rotations}";
     }
+
+    public override bool Equals(Action action)
+    {
+        if (action is StirCauldronAction other)
+        {
+            return stir.Equals(other.stir);
+        }
+        return false;
+    }
 }
 

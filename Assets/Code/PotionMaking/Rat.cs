@@ -7,7 +7,7 @@ public class Rat : MonoBehaviour
 {
     public bool knocksShelf;
     private float speed = 2f;
-    private bool moveLeftOrUp = true;
+    public bool moveLeftOrUp = true;
     
     private Vector2 knockPosition = new Vector2(4, -1);
     private Vector2 bellowsPosition = new Vector2(-6.5f, -3);

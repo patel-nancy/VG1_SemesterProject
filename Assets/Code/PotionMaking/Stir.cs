@@ -8,6 +8,7 @@ public class Stir : MonoBehaviour
     public float rotations;
     public bool clockwise;
     private float rotationSpeed = 250f; //25 deg / sec
+    private float delta = 10f;
     
     public Transform cauldronCenter;
     public PotionMakingSession session;
@@ -36,9 +37,20 @@ public class Stir : MonoBehaviour
         {
             Debug.Log("Rotations: " + rotations);
             clockwise = rotations < 0; // negative = cc
-            session.playerActions.Add(new StirCauldronAction(this));
+            session.currPlayerActions.Add(new StirCauldronAction(this));
 
             rotations = 0;
         }
+    }
+
+    public bool Equals(Stir other)
+    {
+        //if same direction and within ten degrees of expected rotation
+        if (this.clockwise == other.clockwise && Math.Abs(this.rotations - other.rotations) <= delta)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

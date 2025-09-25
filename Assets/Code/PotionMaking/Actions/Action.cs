@@ -6,4 +6,6 @@ using UnityEngine;
 public abstract class Action
 {
     public abstract String description();
+    public abstract bool Equals(Action other);
+    //TODO: override hashcode for best practice
 }

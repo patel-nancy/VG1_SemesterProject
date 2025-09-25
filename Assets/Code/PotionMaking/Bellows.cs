@@ -26,7 +26,7 @@ public class Bellows : MonoBehaviour
         if (fire.duration > fire.cappedDuration)
         {
             Debug.Log("Fire duration: " + fire.duration);
-            session.playerActions.Add(new FireAction(fire));
+            session.currPlayerActions.Add(new FireAction(fire));
             fire.duration = 0;
         }
     }
@@ -38,7 +38,21 @@ public class Bellows : MonoBehaviour
         {
             Debug.Log("Fire duration: " + fire.duration);
             fire.duration = 0;
-            session.playerActions.Add(new FireAction(fire));
+            session.currPlayerActions.Add(new FireAction(fire));
+        }
+    }
+
+    //rat can trigger bellows if going up
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Rat rat = other.gameObject.GetComponent<Rat>();
+        if (rat && rat.moveLeftOrUp)
+        {
+            OnMouseDown();
+        }
+        else if (rat && !rat.moveLeftOrUp)
+        {
+            OnMouseUp();
         }
     }
 }

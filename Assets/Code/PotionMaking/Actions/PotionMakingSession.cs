@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PotionMakingSession : MonoBehaviour
 {
-   public Recipe recipe;
-   public List<Action> playerActions = new List<Action>();
+   public Recipe currRecipe;
+   public List<Action> currPlayerActions = new List<Action>();
+   public List<float> playerScores = new List<float>();
 
    public GameObject ratPrefab;
    private float spawnInterval = 2f; //time btwn spawns
@@ -14,7 +17,7 @@ public class PotionMakingSession : MonoBehaviour
 
    void Start()
    {
-      InvokeRepeating("Spawn", spawnInterval, spawnInterval);
+      //InvokeRepeating("Spawn", spawnInterval, spawnInterval);
    }
 
    void Spawn()
@@ -24,8 +27,6 @@ public class PotionMakingSession : MonoBehaviour
          if (Random.Range(0f, 1f) < 0.5f)
          {
             //shelf
-            Debug.Log("Rat on Shelf");
-            
             Vector2 position = new Vector2(10f, -1f);
             currRat = Instantiate(ratPrefab, position, Quaternion.identity);
             currRat.gameObject.GetComponent<Rat>().knocksShelf = true;
@@ -33,14 +34,31 @@ public class PotionMakingSession : MonoBehaviour
          }
          else
          {
-            Debug.Log("Rat on Bellows");
-            
             Vector2 position = new Vector2(-6.5f, -10f);
             currRat = Instantiate(ratPrefab, position, Quaternion.identity);
             currRat.gameObject.GetComponent<Rat>().knocksShelf = false;
          }
       }
-     
+   }
+
+   public void PotionDone()
+   {
+      //TODO: refactor s.t. Ingredient is plain C# and IngredientDrag takes care of dragging
+      
+      List<Action> actions = new List<Action>();
+      // Ingredient i1 = new Ingredient(IngredientName.Bat);
+      // Ingredient i2 = new Ingredient(IngredientName.Frog);
+      // actions.Add(new AddIngredientAction(i1));
+      // actions.Add(new AddIngredientAction(i2));
+      
+      // currRecipe = new Recipe(
+      //       "fly",
+      //       "fly",
+      //       actions
+      //    );
+      //
+      //check Recipe
+      Debug.Log("Recipe Matches:" + currRecipe.CheckRecipe(currPlayerActions));
    }
 
 }

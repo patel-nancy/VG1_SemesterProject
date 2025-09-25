@@ -6,6 +6,7 @@ using UnityEngine;
 public class DoneBottle : MonoBehaviour
 {
     private Vector2 offset;
+    public PotionMakingSession session;
     
     private void OnMouseDown()
     {
@@ -22,9 +23,10 @@ public class DoneBottle : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Cauldron>())
         {
-            //TODO: determine potion success
             Debug.Log("potion done");
             Destroy(this.gameObject);
+            
+            session.PotionDone(); //TODO: potion success
         }
     }
 }
