@@ -17,7 +17,7 @@ public class PotionMakingSession : MonoBehaviour
 
    void Start()
    {
-      //InvokeRepeating("Spawn", spawnInterval, spawnInterval);
+      InvokeRepeating("Spawn", spawnInterval, spawnInterval);
    }
 
    void Spawn()
@@ -61,7 +61,7 @@ public class PotionMakingSession : MonoBehaviour
       //    );
       
       //check Recipe
-      Debug.Log("Recipe Matches:" + currRecipe.CheckRecipe(currPlayerActions));
+      // Debug.Log("Recipe Matches:" + currRecipe.CheckRecipe(currPlayerActions));
    }
 
 }
