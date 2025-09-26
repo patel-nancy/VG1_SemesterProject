@@ -26,9 +26,14 @@ public class Bellows : MonoBehaviour
 
     void OnMouseUp()
     {
-        Debug.Log("Fire duration: " + fireHold.fire.duration);
-        fireHold.fire.duration = 0;
-        session.currPlayerActions.Add(new FireAction(fireHold.fire));
+        //if rat hits bellows, then duration could be 0.
+        //don't want to add that to actions list, so check
+        if(fireHold.fire.duration != 0)
+        {
+            Debug.Log("Fire duration: " + fireHold.fire.duration);
+            fireHold.fire.duration = 0;
+            session.currPlayerActions.Add(new FireAction(fireHold.fire));
+        }
     }
 
     //rat can trigger bellows if going up
