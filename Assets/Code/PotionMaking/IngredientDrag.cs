@@ -14,7 +14,7 @@ public class IngredientDrag : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         
-        //TODO: generalize
+        // TODO: generalize
         if (sr.sprite.name == "ingredients_0")
         {
             ingredient = new Ingredient(IngredientName.Bat);
@@ -54,8 +54,8 @@ public class IngredientDrag : MonoBehaviour
         Cauldron cauldron = other.gameObject.GetComponent<Cauldron>();
         if (cauldron)
         {
-            cauldron.session.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
-            //TODO: need to see if this ingredient is a counter
+            // cauldron.session.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
+            // //TODO: need to see if this ingredient is a counter
             
             Debug.Log(ingredient.name);
             Destroy(this.gameObject);

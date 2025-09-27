@@ -37,16 +37,16 @@ public class Bellows : MonoBehaviour
     }
 
     //rat can trigger bellows if going up
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Rat rat = other.gameObject.GetComponent<Rat>();
-        if (rat && rat.moveLeftOrUp)
-        {
-            OnMouseDown();
-        }
-        else if (rat && !rat.moveLeftOrUp)
-        {
-            OnMouseUp();
-        }
-    }
+    // private void OnCollisionEnter2D(Collision2D other)
+    // {
+    //     Rat rat = other.gameObject.GetComponent<Rat>();
+    //     if (rat && rat.moveLeftOrUp)
+    //     {
+    //         OnMouseDown();
+    //     }
+    //     else if (rat && !rat.moveLeftOrUp)
+    //     {
+    //         OnMouseUp();
+    //     }
+    // }
 }

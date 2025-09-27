@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainLobby.unity
     guid: 3d7f7036f4045f84087e1d1180f04713
+  - enabled: 1
+    path: Assets/Scenes/CustomerScene.unity
+    guid: 4773155050fa5408686d253a35c0ee34
   - enabled: 1
     path: Assets/Scenes/PotionMaking.unity
     guid: 2cda990e2423bbf4892e6590ba056729

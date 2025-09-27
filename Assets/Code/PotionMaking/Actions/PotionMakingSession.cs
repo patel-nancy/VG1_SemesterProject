@@ -24,20 +24,31 @@ public class PotionMakingSession : MonoBehaviour
    {
       if (currRat == null)
       {
-         if (Random.Range(0f, 1f) < 0.5f)
+         Vector2 position = new Vector2(10f, -1f);
+         currRat = Instantiate(ratPrefab, position, Quaternion.identity);
+         IngredientDrag[] allIngredients = FindObjectsOfType<IngredientDrag>();
+         Debug.Log("spawning rat " + allIngredients.Length);
+         if (allIngredients.Length > 0)
          {
-            //shelf
-            Vector2 position = new Vector2(10f, -1f);
-            currRat = Instantiate(ratPrefab, position, Quaternion.identity);
-            currRat.gameObject.GetComponent<Rat>().knocksShelf = true;
+            IngredientDrag randomIngredient = allIngredients[Random.Range(0, allIngredients.Length)];
 
+            Rat ratScript = currRat.GetComponent<Rat>();
+            ratScript.SetTarget(randomIngredient.gameObject);
          }
-         else
-         {
-            Vector2 position = new Vector2(-6.5f, -10f);
-            currRat = Instantiate(ratPrefab, position, Quaternion.identity);
-            currRat.gameObject.GetComponent<Rat>().knocksShelf = false;
-         }
+         // if (Random.Range(0f, 1f) < 0.5f)
+         // {
+         //    //shelf
+         //    Vector2 position = new Vector2(10f, -1f);
+         //    currRat = Instantiate(ratPrefab, position, Quaternion.identity);
+         //    // currRat.gameObject.GetComponent<Rat>().knocksShelf = true;
+
+         // }
+         // else
+         // {
+         //    Vector2 position = new Vector2(-6.5f, -10f);
+         //    currRat = Instantiate(ratPrefab, position, Quaternion.identity);
+         //    // currRat.gameObject.GetComponent<Rat>().knocksShelf = false;
+         // }
       }
    }
 
