@@ -54,7 +54,7 @@ public class IngredientDrag : MonoBehaviour
         Cauldron cauldron = other.gameObject.GetComponent<Cauldron>();
         if (cauldron)
         {
-            // cauldron.session.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
+            cauldron.session.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
             // //TODO: need to see if this ingredient is a counter
             
             Debug.Log(ingredient.name);
