@@ -9,7 +9,6 @@ public class StirKeyboard : MonoBehaviour
     
     private Stir stir;
     public Transform cauldronCenter;
-    public PotionMakingSession session;
 
     private void Start()
     {
@@ -39,7 +38,7 @@ public class StirKeyboard : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
             Debug.Log("Rotations: " + stir.rotations);
-            session.currPlayerActions.Add(new StirCauldronAction(stir));
+            OrderSession.instance.currPlayerActions.Add(new StirCauldronAction(stir));
 
             stir = new Stir();
         }

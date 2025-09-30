@@ -5,5 +5,5 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour
 {
-    public PotionMakingSession session;    
+       
 }
