@@ -1,25 +1,63 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class OrderSession : MonoBehaviour
 {
-    public static OrderSession Instance { get; private set; }
+    //WTS: current customer, recipe, + player actions. handle rat moving.
+    //     keep track of score.
+    //     should be available to all classes
+    public static OrderSession instance;
+    
+    //order 
     public string customerName;
-    public string recipeName;
-    public List<IngredientName> recipeIngredients = new();
+    public Recipe currRecipe;
+    
+    //potion making
+    public List<Action> currPlayerActions = new List<Action>();
+    
+    //scoring
+    public float score;
+    private TMP_Text scoreText;
 
     void Awake() {
-        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-        Debug.Log("[OrderSession] Awake (DontDestroyOnLoad)");
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject); 
+        }
+        
     }
 
-    public void SetOrder(string cust, string rec, List<IngredientName> ings) {
-        customerName = cust;
-        recipeName = rec;
-        recipeIngredients = new List<IngredientName>(ings);
-        Debug.Log($"[OrderSession] SetOrder -> customer={customerName}, recipe={recipeName}, ingredients=[{string.Join(", ", recipeIngredients)}]");
+    void Start()
+    {
+        score = 0;
+        instance = this; //do i need this?
+    }
+    
+    public void SetOrder(string customerName, Recipe recipe) {
+        this.customerName = customerName;
+        this.currRecipe = recipe;
+    }
+    
+    public void PotionDone()
+    {
+        if (currRecipe.CheckRecipe(currPlayerActions))
+        {
+            //recipe matches
+            Debug.Log("Recipe matches!");
+            score += 10;
+        }
+        else
+        {
+            Debug.Log("Recipe DOES NOT match!");
+            score -= 10;
+        }
     }
 }

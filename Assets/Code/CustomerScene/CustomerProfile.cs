@@ -10,6 +10,6 @@ public class CustomerProfile : MonoBehaviour
     void Awake()
     {
         customerName = Names[Random.Range(0, Names.Length)];
-        Debug.Log($"[CustomerProfile] Assigned customerName = {customerName}");
+        // Debug.Log($"[CustomerProfile] Assigned customerName = {customerName}");
     }
 }

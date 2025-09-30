@@ -9,7 +9,6 @@ public class Bellows : MonoBehaviour
 
     private Vector2 offset;
     private float stopYPosition = -0f;
-    public PotionMakingSession session;
     
     private void OnMouseDrag()
     {
@@ -32,7 +31,7 @@ public class Bellows : MonoBehaviour
         {
             Debug.Log("Fire duration: " + fireHold.fire.duration);
             fireHold.fire.duration = 0;
-            session.currPlayerActions.Add(new FireAction(fireHold.fire));
+            OrderSession.instance.currPlayerActions.Add(new FireAction(fireHold.fire));
         }
     }
 

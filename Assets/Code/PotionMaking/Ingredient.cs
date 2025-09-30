@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum IngredientName { Frog, Bat, Eye } 
-public enum CounterIngredientName { Toad, Squirrel, Hair} //counters for general ingredients
+public enum CounterIngredientName { Toad, Squirrel, Hair } //counters for general ingredients
 
 public class Ingredient
 {
