@@ -14,7 +14,7 @@ public class StirCauldronAction : Action
     
     public override String description()
     {
-        return $"Rotations: {stir.rotations}";
+        return $"Stir {stir.rotations} times";
     }
 
     public override bool Equals(Action action)

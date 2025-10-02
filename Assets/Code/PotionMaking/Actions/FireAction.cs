@@ -13,7 +13,7 @@ public class FireAction : Action
     
     public override string description()
     {
-        return $"Fire on for: {fire.duration}";
+        return $"Fire on for {fire.duration} seconds";
     }
     
     public override bool Equals(Action action)

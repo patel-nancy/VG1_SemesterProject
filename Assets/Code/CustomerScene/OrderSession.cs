@@ -21,7 +21,6 @@ public class OrderSession : MonoBehaviour
     
     //scoring
     public float score;
-    private TMP_Text scoreText;
 
     void Awake() {
         if (instance == null)
@@ -41,6 +40,19 @@ public class OrderSession : MonoBehaviour
         score = 0;
         instance = this; //do i need this?
     }
+
+    public static void RestartSession()
+    {
+        if (instance != null)
+        {
+            Destroy(instance.gameObject);
+            instance = null;
+        }
+
+        GameObject newSession = new GameObject("OrderSession");
+        instance = newSession.AddComponent<OrderSession>();
+        SceneManager.LoadScene("CustomerScene");
+    }
     
     public void SetOrder(string customerName, Recipe recipe) {
         this.customerName = customerName;
@@ -49,6 +61,7 @@ public class OrderSession : MonoBehaviour
     
     public void PotionDone()
     {
+        //award points
         if (currRecipe.CheckRecipe(currPlayerActions))
         {
             //recipe matches
@@ -60,8 +73,15 @@ public class OrderSession : MonoBehaviour
             Debug.Log("Recipe DOES NOT match!");
             score -= 10;
         }
-
-        currPlayerActions.Clear();
-        SceneManager.LoadScene("CustomerScene");
+        
+        //determine if game over
+        if (score < 0 || score >= 30)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+        else {
+          currPlayerActions.Clear();
+          SceneManager.LoadScene("CustomerScene");
+        }
     }
 }
