@@ -33,4 +33,14 @@ public class Recipe
         this.name = name;
         this.actions = actions;
     }
+
+    public static String describe(List<Action> actions)
+    {
+        String d = "";
+        for (int i = 0; i < actions.Count; i++)
+        {
+            d += actions[i].description() + "\n";
+        }
+        return d;
+    }
 }

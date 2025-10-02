@@ -20,20 +20,20 @@ public class Bellows : MonoBehaviour
     private void OnMouseDown()
     {
         offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition); //sprite location - mouse location (in world)
-        fireHold.fire.duration += Time.deltaTime;
+        fireHold.fire.duration += 5.0f;
     }
 
-    void OnMouseUp()
-    {
-        //if rat hits bellows, then duration could be 0.
-        //don't want to add that to actions list, so check
-        if(fireHold.fire.duration != 0)
-        {
-            Debug.Log("Fire duration: " + fireHold.fire.duration);
-            fireHold.fire.duration = 0;
-            OrderSession.instance.currPlayerActions.Add(new FireAction(fireHold.fire));
-        }
-    }
+    // void OnMouseUp()
+    // {
+    //     //if rat hits bellows, then duration could be 0.
+    //     //don't want to add that to actions list, so check
+    //     if(fireHold.fire.duration != 0)
+    //     {
+    //         Debug.Log("Fire duration: " + fireHold.fire.duration);
+    //         fireHold.fire.duration = 0;
+    //         OrderSession.instance.currPlayerActions.Add(new FireAction(fireHold.fire));
+    //     }
+    // }
 
     //rat can trigger bellows if going up
     // private void OnCollisionEnter2D(Collision2D other)

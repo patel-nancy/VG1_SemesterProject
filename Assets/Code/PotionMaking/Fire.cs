@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Fire
 { 
-    private float delta = 5f;
+    private float delta = 1f;
     public float duration; //TODO should make private with setters/getters
 
     public Fire()
