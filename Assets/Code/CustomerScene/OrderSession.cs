@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OrderSession : MonoBehaviour
 {
@@ -59,5 +60,8 @@ public class OrderSession : MonoBehaviour
             Debug.Log("Recipe DOES NOT match!");
             score -= 10;
         }
+
+        currPlayerActions.Clear();
+        SceneManager.LoadScene("CustomerScene");
     }
 }
