@@ -61,6 +61,7 @@ public class OrderSession : MonoBehaviour
     
     public void PotionDone()
     {
+        //award points
         if (currRecipe.CheckRecipe(currPlayerActions))
         {
             //recipe matches
@@ -72,9 +73,15 @@ public class OrderSession : MonoBehaviour
             Debug.Log("Recipe DOES NOT match!");
             score -= 10;
         }
+        
+        //determine if game over
         if (score < 0 || score >= 30)
         {
             SceneManager.LoadScene("GameOver");
+        }
+        else {
+          currPlayerActions.Clear();
+          SceneManager.LoadScene("CustomerScene");
         }
     }
 }
