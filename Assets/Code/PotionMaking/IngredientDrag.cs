@@ -16,18 +16,19 @@ public class IngredientDrag : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         
         // TODO: generalize
-        if (sr.sprite.name == "ingredients_0")
+        if (gameObject.name.StartsWith("ingredients_0"))
         {
             ingredient = new Ingredient(IngredientName.Bat);
         }
-        else if (sr.sprite.name == "ingredients_1")
+        else if (gameObject.name.StartsWith("ingredients_1"))
         {
             ingredient = new Ingredient(IngredientName.Frog);
         }
-        else if (sr.sprite.name == "ingredients_2")
+        else if (gameObject.name.StartsWith("ingredients_2"))
         {
             ingredient = new Ingredient(IngredientName.Eye);
         }
+
     }
     
     private void OnMouseDown()
