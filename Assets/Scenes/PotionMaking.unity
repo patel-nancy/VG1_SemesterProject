@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 240536069}
   - component: {fileID: 240536073}
   m_Layer: 6
-  m_Name: ingredients_0
+  m_Name: rat (ingredient)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
