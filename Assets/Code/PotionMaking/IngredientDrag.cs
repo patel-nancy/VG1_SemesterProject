@@ -57,9 +57,21 @@ public class IngredientDrag : MonoBehaviour
         if (cauldron)
         {
             Debug.Log(ingredient.name);
-            OrderSession.instance.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
+            OrderSession.instance.currPlayerActions.Add(new AddIngredientAction(ingredient));
             // //TODO: need to see if this ingredient is a counter
-            
+
+
+            if (ingredient.name == IngredientName.Bat)  {// Bat ingredient timer
+                cauldron.StartIngredientTimer(ingredient);
+            }
+
+             if (ingredient.name == IngredientName.Frog)  {// Frog ingredient timer
+                cauldron.StartIngredientTimer(ingredient);
+            }
+
+             if (ingredient.name == IngredientName.Eye)  {// Eye ingredient timer
+                cauldron.StartIngredientTimer(ingredient);
+            }
             Destroy(this.gameObject);
         }
     }
