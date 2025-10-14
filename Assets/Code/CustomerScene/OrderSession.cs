@@ -12,14 +12,55 @@ public class OrderSession : MonoBehaviour
     //     should be available to all classes
     public static OrderSession instance;
     
-    //order 
+    //customer
     public string customerName;
-    public Recipe currRecipe;
+    
+    //recipes
+    public static Dictionary<string, Recipe> recipe_cookbook = new Dictionary<string, Recipe> { 
+        {
+            "invisibility", 
+            new Recipe(
+                "invisibility", 
+                new List<Action>
+                {
+                    new AddIngredientAction(new Ingredient(IngredientName.Bat)),
+                    new StirCauldronAction(new Stir(-360f)),
+                    new FireAction(new Fire(4f))
+                }
+            )
+        },
+        {
+            "flying",
+            new Recipe(
+                "flying",
+                new List<Action>
+                {
+                    new AddIngredientAction(new Ingredient(IngredientName.Bat)),
+                    new AddIngredientAction(new Ingredient(IngredientName.Frog)),
+                }
+            )
+        },
+        {
+            "liquid_luck",
+            new Recipe(
+                "liquid_luck",
+                new List<Action>
+                {
+                    new AddIngredientAction(new Ingredient(IngredientName.Frog)),
+                    new FireAction(new Fire(4f))
+                }
+            )
+        }
+    };
+    
+    public Recipe selectedRecipe; //the recipe the player picks
+    public Recipe expectedRecipe; //the recipe we expect, based on the customer's dialogue
     
     //potion making
     public List<Action> currPlayerActions = new List<Action>();
     
-    //scoring
+    //tutorial + scoring
+    public static bool isTutorial = true;
     public float score;
 
     void Awake() {
@@ -54,23 +95,41 @@ public class OrderSession : MonoBehaviour
         SceneManager.LoadScene("CustomerScene");
     }
     
+    //order = customer + recipe
     public void SetOrder(string customerName, Recipe recipe) {
         this.customerName = customerName;
-        this.currRecipe = recipe;
+        this.selectedRecipe = recipe;
     }
     
     public void PotionDone()
     {
-        //award points
-        if (currRecipe.CheckRecipe(currPlayerActions))
+        //finished tutorial
+        if (isTutorial)
         {
-            //recipe matches
-            Debug.Log("Recipe matches!");
-            score += 10;
+            isTutorial = false;
+        }
+        
+        //determines if the player chose the right recipe, given what the customer wanted (based on dialogue)
+        if (selectedRecipe.Equals(expectedRecipe))
+        {
+            Debug.Log("Chose the RIGHT recipe for customer's problem!");
+            
+            //award points
+            if (selectedRecipe.CheckRecipe(currPlayerActions))
+            {
+                //recipe matches
+                Debug.Log("Recipe matches!");
+                score += 10;
+            }
+            else
+            {
+                Debug.Log("Recipe DOES NOT match!");
+                score -= 10;
+            }
         }
         else
         {
-            Debug.Log("Recipe DOES NOT match!");
+            Debug.Log("Chose the WRONG recipe for customer's problem!");
             score -= 10;
         }
         

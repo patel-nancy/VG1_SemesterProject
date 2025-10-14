@@ -5,78 +5,39 @@ using UnityEngine.SceneManagement;
 
 public class CustomerMenu : MonoBehaviour
 {
-    [SerializeField] string cauldronSceneName = "PotionMaking"; 
-    DialogueController dialogue;
     CustomerProfile profile;
 
-    void Start() {
-        dialogue = FindObjectOfType<DialogueController>();
-        profile  = FindObjectOfType<CustomerProfile>();
-        // Debug.Log($"[CustomerMenu] Start. profile={(profile ? profile.customerName : "null")}, dialogue={(dialogue ? "ok" : "null")}");
+    void Start()
+    {
+        profile = FindObjectOfType<CustomerProfile>();
     }
     
     public void PickInvisibility() {
-        List<Action> actions = new List<Action>();
-        Ingredient i1 = new Ingredient(IngredientName.Bat);
-        Stir s1 = new Stir(-360f);
-        actions.Add(new AddIngredientAction(i1));
-        actions.Add(new StirCauldronAction(s1));
-
-        Recipe recipe = new Recipe("invisibility", actions);
-        // if (OrderSession.instance == null)
-        // {
-        //     Debug.LogError("[CustomerMenu] No OrderSession in scene!"); return;
-        // }
-        OrderSession.instance.SetOrder(profile.customerName, recipe);
-        
-        dialogue?.SetLine($"{profile.customerName}: \"I’ll take an Invisibility Potion.\"");
+        OrderSession.instance.SetOrder(profile.customerName, OrderSession.recipe_cookbook["invisibility"]);
     }
 
-    public void PickFlying() {
-        List<Action> actions = new List<Action>();
-        Ingredient i1 = new Ingredient(IngredientName.Bat);
-        Ingredient i2 = new Ingredient(IngredientName.Frog);
-        actions.Add(new AddIngredientAction(i1));
-        actions.Add(new AddIngredientAction(i2));
-        Recipe recipe = new Recipe("flying", actions);
-
-        // if (OrderSession.instance == null)
-        // {
-        //     Debug.LogError("[CustomerMenu] No OrderSession in scene!"); return;
-        // }
-        OrderSession.instance.SetOrder(profile.customerName, recipe);
-        
-        dialogue?.SetLine($"{profile.customerName}: \"I’ll take a Flying Potion.\"");
+    public void PickFlying()
+    {
+        OrderSession.instance.SetOrder(profile.customerName, OrderSession.recipe_cookbook["flying"]);
     }
 
     public void PickLiquidLuck() {
-        List<Action> actions = new List<Action>();
-        Ingredient i1 = new Ingredient(IngredientName.Frog);
-        Fire f1 = new Fire(4f);
-        actions.Add(new AddIngredientAction(i1));
-        actions.Add(new FireAction(f1));
-        
-        Recipe recipe = new Recipe("liquid_luck", actions);
-        // if (OrderSession.instance == null)
-        // {
-        //     Debug.LogError("[CustomerMenu] No OrderSession in scene!"); return;
-        // }
-        OrderSession.instance.SetOrder(profile.customerName, recipe);
-        dialogue?.SetLine($"{profile.customerName}: \"I’ll take Liquid Luck.\"");
+        OrderSession.instance.SetOrder(profile.customerName, OrderSession.recipe_cookbook["liquid_luck"]);
     }
 
     public void SendToCauldron() {
-        // if (OrderSession.instance == null)
-        // {
-        //     Debug.LogError("[CustomerMenu] No OrderSession!"); return;
-        // }
-        
-        Debug.Log("submit");
-        if (OrderSession.instance.currRecipe.name == null) {
+        if (OrderSession.instance.selectedRecipe.name == null) {
             Debug.LogWarning("[CustomerMenu] No recipe selected; ignoring SendToCauldron");
             return;
         }
+
+        //if on tutorial mode AND they pick the WRONG recipe (not invisibility), then reprompt
+        if (OrderSession.isTutorial && OrderSession.instance.selectedRecipe.name != "invisibility")
+        {
+            CustomerSceneTutorialController.instance.Reprompt();
+            return;
+        }
         
-        SceneManager.LoadScene(cauldronSceneName);
+        SceneManager.LoadScene("PotionMaking");
     }
 }

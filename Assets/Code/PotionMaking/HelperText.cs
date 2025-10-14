@@ -10,8 +10,8 @@ public class HelperText : MonoBehaviour
     {
         if (OrderSession.instance != null)
         {
-            recipeText.text = "Recipe: \n" + Recipe.describe(OrderSession.instance.currRecipe.actions) + "Bottle potion!";
-            actualText.text = "Your actions: \n" + Recipe.describe(OrderSession.instance.currPlayerActions);
+            recipeText.text = "Recipe: \n" + Recipe.describe(OrderSession.instance.selectedRecipe.actions) + "Bottle potion!";
+            actualText.text = "Actual: \n" + Recipe.describe(OrderSession.instance.currPlayerActions);
         }
     }
 }

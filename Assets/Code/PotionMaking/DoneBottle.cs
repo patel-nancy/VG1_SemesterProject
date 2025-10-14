@@ -22,7 +22,6 @@ public class DoneBottle : MonoBehaviour
     {
         if (other.gameObject.GetComponent<Cauldron>())
         {
-            Debug.Log("done bottle dropped into cauldron -- potion done");
             Destroy(this.gameObject);
             
             OrderSession.instance.PotionDone();
