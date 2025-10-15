@@ -18,6 +18,12 @@ public class GameOverController : MonoBehaviour
 
     public void RestartGame()
     {
+
+         // find any customer profiles still loaded and randomize them
+        foreach (CustomerProfile customer in FindObjectsOfType<CustomerProfile>())
+        {
+            customer.RandomizeProfile();
+        }
         OrderSession.RestartSession();
     }
 }
