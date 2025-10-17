@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StirCauldronAction : Action
 {
-    private Stir stir;
+    public Stir stir;
 
     public StirCauldronAction(Stir stir)
     {

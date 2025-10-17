@@ -143,4 +143,19 @@ public class OrderSession : MonoBehaviour
           SceneManager.LoadScene("CustomerScene");
         }
     }
+
+    public void AddAction(Action a)
+    {
+        if (currPlayerActions.Count > 0) {
+            Action last = currPlayerActions[currPlayerActions.Count-1];
+            if (a is FireAction afire && last is FireAction lastfire) {
+                lastfire.fire.duration += afire.fire.duration;
+                return;
+            } else if (a is StirCauldronAction astir && last is StirCauldronAction laststir) {
+                laststir.stir.rotations += astir.stir.rotations;
+                return;
+            }
+        }
+        currPlayerActions.Add(a);
+    }
 }

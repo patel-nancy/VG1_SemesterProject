@@ -5,7 +5,7 @@ using UnityEngine;
 public class IngredientDrag : MonoBehaviour
 {
     
-    private bool dragging = false;
+    public bool dragging = true;
     private Vector2 offset;
     
     private Ingredient ingredient;
@@ -16,37 +16,37 @@ public class IngredientDrag : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         
         // TODO: generalize
-        if (gameObject.name.StartsWith("ingredients_0"))
+        if (gameObject.name.StartsWith("bat"))
         {
             ingredient = new Ingredient(IngredientName.Bat);
         }
-        else if (gameObject.name.StartsWith("ingredients_1"))
+        else if (gameObject.name.StartsWith("frog"))
         {
             ingredient = new Ingredient(IngredientName.Frog);
         }
-        else if (gameObject.name.StartsWith("ingredients_2"))
+        else if (gameObject.name.StartsWith("eye"))
         {
             ingredient = new Ingredient(IngredientName.Eye);
         }
 
     }
     
-    private void OnMouseDown()
-    {
-        dragging = true;
-        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
+    // private void OnMouseDown()
+    // {
+    //     dragging = true;
+    //     offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    // }
 
-    private void OnMouseDrag()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePosition + offset; 
-    }
+    // private void OnMouseDrag()
+    // {
+    //     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    //     transform.position = mousePosition + offset; 
+    // }
 
-    private void OnMouseUp()
-    {
-        dragging = false;
-    }
+    // private void OnMouseUp()
+    // {
+    //     dragging = false;
+    // }
 
     void OnCollisionStay2D(Collision2D other)
     {
