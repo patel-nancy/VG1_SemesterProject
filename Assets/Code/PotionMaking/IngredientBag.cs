@@ -10,7 +10,6 @@ public class IngredientBag : MonoBehaviour
     private void OnMouseDown()
     {
         // spawn new ingredient
-        Debug.Log("mouse down on ingredient bag");
         currentIngredient = Instantiate(ingredientPrefab, transform.position, Quaternion.identity);
         currentIngredient.GetComponent<IngredientDrag>().dragging = true;
     }

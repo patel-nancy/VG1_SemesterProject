@@ -24,29 +24,16 @@ public class IngredientDrag : MonoBehaviour
         {
             ingredient = new Ingredient(IngredientName.Frog);
         }
-        else if (gameObject.name.StartsWith("eye"))
+        else if (gameObject.name.StartsWith("squirrel"))
         {
-            ingredient = new Ingredient(IngredientName.Eye);
+            ingredient = new Ingredient(IngredientName.Squirrel);
+        }
+        else if (gameObject.name.StartsWith("toad"))
+        {
+            ingredient = new Ingredient(IngredientName.Toad);
         }
 
     }
-    
-    // private void OnMouseDown()
-    // {
-    //     dragging = true;
-    //     offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    // }
-
-    // private void OnMouseDrag()
-    // {
-    //     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    //     transform.position = mousePosition + offset; 
-    // }
-
-    // private void OnMouseUp()
-    // {
-    //     dragging = false;
-    // }
 
     void OnCollisionStay2D(Collision2D other)
     {
@@ -56,10 +43,7 @@ public class IngredientDrag : MonoBehaviour
         Cauldron cauldron = other.gameObject.GetComponent<Cauldron>();
         if (cauldron)
         {
-            Debug.Log(ingredient.name);
-            OrderSession.instance.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
-            // //TODO: need to see if this ingredient is a counter
-            
+            OrderSession.instance.AddAction(new AddIngredientAction(ingredient));
             Destroy(this.gameObject);
         }
     }
