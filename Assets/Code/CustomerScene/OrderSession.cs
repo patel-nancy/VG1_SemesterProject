@@ -63,6 +63,8 @@ public class OrderSession : MonoBehaviour
     //tutorial + scoring
     public static bool isTutorial = true;
     public float score;
+    public float MAX_SCORE = 10;
+    public float WIN_SCORE = 30;
 
     void Awake() {
         if (instance == null)
@@ -111,40 +113,25 @@ public class OrderSession : MonoBehaviour
         }
         
         //determines if the player chose the right recipe, given what the customer wanted (based on dialogue)
-        // if (selectedRecipe.Equals(expectedRecipe))
-        // {
-        //     Debug.Log("Chose the RIGHT recipe for customer's problem!");
-        //     
-        //     //award points
-        //     if (selectedRecipe.CheckRecipe(currPlayerActions))
-        //     {
-        //         //recipe matches
-        //         Debug.Log("Recipe matches!");
-        //         score += 10;
-        //     }
-        //     else
-        //     {
-        //         Debug.Log("Recipe DOES NOT match!");
-        //         score -= 10;
-        //     }
-        // }
-        // else
-        // {
-        //     Debug.Log("Chose the WRONG recipe for customer's problem!");
-        //     score -= 10;
-        // }
-        selectedRecipe.ScoreRecipe(currPlayerActions);
-
-
-        //determine if game over
-        // if (score < 0 || score >= 30)
-        // {
-        //     SceneManager.LoadScene("GameOver");
-        // }
-        // else {
-        //   currPlayerActions.Clear();
-        //   SceneManager.LoadScene("CustomerScene");
-        // }
+        if (selectedRecipe.Equals(expectedRecipe))
+        {
+            //award points
+            score += selectedRecipe.ScoreRecipe(currPlayerActions);
+        }
+        else
+        {
+            score -= MAX_SCORE;
+        }
+        
+        // determine if game over
+         if (score < 0 || score >= WIN_SCORE)
+         {
+             SceneManager.LoadScene("GameOver");
+         }
+         else {
+           currPlayerActions.Clear();
+           SceneManager.LoadScene("CustomerScene");
+         }
     }
 
     public void AddAction(Action a)

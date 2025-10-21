@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Recipe
@@ -31,52 +32,79 @@ public class Recipe
     
     public float ScoreRecipe(List<Action> playerActions)
     {
-        float[] actions_array = new float[actions.Count];
-        float[] playerActions_array = new float[playerActions.Count];
-
-        for (int i = 0; i < actions_array.Length; i++)
-        {
-            actions_array[i] = actions.ElementAt(i).ToFloat();
-        }
-
-        for (int i = 0; i < playerActions_array.Length; i++)
-        {
-            playerActions_array[i] = playerActions.ElementAt(i).ToFloat();
-        }
-
-        float score = 10 - CalculateDistance(actions_array, playerActions_array);
-        Debug.Log("Score: " + score);
+        float MAX_SCORE = OrderSession.instance.MAX_SCORE;
         
-        return score;
-    }
+        Vector3 actions_vector = new Vector3(0, 0, 0);
+        Vector3 playerActions_vector = new Vector3(0, 0, 0);
 
-    private float CalculateDistance(float[] a1, float[] a2)
-    {
-        float sum = 0;
-        int n = Math.Max(a1.Length, a2.Length);
-
-        for (int i = 0; i < n; i++)
+        foreach (Action action in actions)
         {
-            float diff = 0;
-            if (i < a1.Length && i < a2.Length)
+            //[1, 0, 0]
+            if (action is AddIngredientAction)
             {
-                diff = a1[i] - a2[i];
-            }
-            else if (i < a1.Length && i >= a1.Length)
+                actions_vector.x += action.ToFloat();
+            }   
+            //[0, 1, 0]
+            else if (action is FireAction)
             {
-                diff = a1[i] - 0;
+                actions_vector.y += action.ToFloat();
             }
-            else 
+            //[0, 0, 1]
+            else
             {
-                diff = 0 - a2[i];
+                actions_vector.z += action.ToFloat();
             }
-
-            sum += diff * diff;
         }
+        foreach (Action action in playerActions)
+        {
+            //[1, 0, 0]
+            if (action is AddIngredientAction)
+            {
+                playerActions_vector.x += action.ToFloat();
+            }   
+            //[0, 1, 0]
+            else if (action is FireAction)
+            {
+                playerActions_vector.y += action.ToFloat();
+            }
+            //[0, 0, 1]
+            else
+            {
+                playerActions_vector.z += action.ToFloat();
+            }
+        }
+        
+        //normalize vectors [-1,1]
+        float maxX = Mathf.Max(Mathf.Abs(actions_vector.x), Mathf.Abs(playerActions_vector.x));
+        float maxY = Mathf.Max(Mathf.Abs(actions_vector.y), Mathf.Abs(playerActions_vector.y));
+        float maxZ = Mathf.Max(Mathf.Abs(actions_vector.z), Mathf.Abs(playerActions_vector.z));
+        
+        actions_vector.x /= maxX;
+        actions_vector.y /= maxY;
+        actions_vector.z /= maxZ;
+        
+        playerActions_vector.x /= maxX;
+        playerActions_vector.y /= maxY;
+        playerActions_vector.z /= maxZ;
+        
+        //scale s.t. maximum distance <= MAX_SCORE (s.t. score = [-MAX_SCORE, MAX_SCORE]
+        float max_og_dist = Mathf.Sqrt(12); //[-1, -1, -1] and [1, 1, 1]
+        float scale = 2 * MAX_SCORE / max_og_dist;
+        
+        actions_vector.x *= scale;
+        actions_vector.y *= scale;
+        actions_vector.z *= scale;
+        
+        playerActions_vector.x *= scale;
+        playerActions_vector.y *= scale;
+        playerActions_vector.z *= scale;
+        
+        //calculate distance btwn normalized/scaled vectors
+        float distance = Vector3.Distance(actions_vector, playerActions_vector);
+        
+        return MAX_SCORE - distance;
 
-        return (float)Math.Sqrt(sum);
     }
-
 
     public Recipe(String name, List<Action> actions)
     {
