@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AddIngredientAction : Action
 {
-    private Ingredient ingredient;
+    public Ingredient ingredient;
 
     public AddIngredientAction(Ingredient ingredient)
     {
@@ -24,6 +24,10 @@ public class AddIngredientAction : Action
             return ingredient.Equals(other.ingredient);
         }
         return false;
-        
+    }
+
+    public override float ToFloat()
+    {
+        return (int)ingredient.name;
     }
 }

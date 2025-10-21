@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -62,6 +63,8 @@ public class OrderSession : MonoBehaviour
     //tutorial + scoring
     public static bool isTutorial = true;
     public float score;
+    public float MAX_SCORE = 10;
+    public float WIN_SCORE = 30;
 
     void Awake() {
         if (instance == null)
@@ -112,47 +115,41 @@ public class OrderSession : MonoBehaviour
         //determines if the player chose the right recipe, given what the customer wanted (based on dialogue)
         if (selectedRecipe.Equals(expectedRecipe))
         {
-            Debug.Log("Chose the RIGHT recipe for customer's problem!");
-            
             //award points
-            if (selectedRecipe.CheckRecipe(currPlayerActions))
-            {
-                //recipe matches
-                Debug.Log("Recipe matches!");
-                score += 10;
-            }
-            else
-            {
-                Debug.Log("Recipe DOES NOT match!");
-                score -= 10;
-            }
+            score += selectedRecipe.ScoreRecipe(currPlayerActions);
         }
         else
         {
-            Debug.Log("Chose the WRONG recipe for customer's problem!");
-            score -= 10;
+            score -= MAX_SCORE;
         }
         
-        //determine if game over
-        if (score < 0 || score >= 30)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-        else {
-          currPlayerActions.Clear();
-          SceneManager.LoadScene("CustomerScene");
-        }
+        // determine if game over
+         if (score < 0 || score >= WIN_SCORE)
+         {
+             SceneManager.LoadScene("GameOver");
+         }
+         else {
+           currPlayerActions.Clear();
+           SceneManager.LoadScene("CustomerScene");
+         }
     }
 
     public void AddAction(Action a)
     {
         if (currPlayerActions.Count > 0) {
+            //condense if last two actions are the same
             Action last = currPlayerActions[currPlayerActions.Count-1];
             if (a is FireAction afire && last is FireAction lastfire) {
                 lastfire.fire.duration += afire.fire.duration;
                 return;
             } else if (a is StirCauldronAction astir && last is StirCauldronAction laststir) {
                 laststir.stir.rotations += astir.stir.rotations;
+                return;
+            }
+            //remove last ingredient because the counteringred placed in
+            else if (a is AddIngredientAction aingred && last is AddIngredientAction lastingred && lastingred.ingredient.counterName == aingred.ingredient.name)
+            {
+                currPlayerActions.RemoveAt(currPlayerActions.Count - 1);
                 return;
             }
         }
