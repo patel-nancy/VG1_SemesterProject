@@ -78,6 +78,22 @@ public class Recipe
         float maxX = Mathf.Max(Mathf.Abs(actions_vector.x), Mathf.Abs(playerActions_vector.x));
         float maxY = Mathf.Max(Mathf.Abs(actions_vector.y), Mathf.Abs(playerActions_vector.y));
         float maxZ = Mathf.Max(Mathf.Abs(actions_vector.z), Mathf.Abs(playerActions_vector.z));
+
+        //ensure no divide by 0
+        if (maxX == 0)
+        {
+            maxX = 1;
+        }
+
+        if (maxY == 0)
+        {
+            maxY = 1;
+        }
+
+        if (maxZ == 0)
+        {
+            maxZ = 1;
+        }
         
         actions_vector.x /= maxX;
         actions_vector.y /= maxY;
@@ -101,8 +117,8 @@ public class Recipe
         
         //calculate distance btwn normalized/scaled vectors
         float distance = Vector3.Distance(actions_vector, playerActions_vector);
-        
-        return MAX_SCORE - distance;
+        float score = MAX_SCORE - distance;
+        return score;
 
     }
 
