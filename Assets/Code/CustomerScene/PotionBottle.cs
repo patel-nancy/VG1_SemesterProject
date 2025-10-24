@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoneBottle : MonoBehaviour
+public class PotionBottle : MonoBehaviour
 {
+    public Potion potion;
     private Vector2 offset;
     
     private void OnMouseDown()
@@ -20,7 +21,8 @@ public class DoneBottle : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        if (other.gameObject.GetComponent<Cauldron>())
+        Debug.Log("wow collision\n");
+        if (other.gameObject.GetComponent<CustomerProfile>())
         {
             Destroy(this.gameObject);
             

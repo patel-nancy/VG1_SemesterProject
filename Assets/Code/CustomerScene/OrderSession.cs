@@ -59,6 +59,7 @@ public class OrderSession : MonoBehaviour
     
     //potion making
     public List<Action> currPlayerActions = new List<Action>();
+    public List<Potion> completedPotions = new List<Potion> {new Potion(new List<Action>(), null), new Potion(new List<Action>(), null), new Potion(new List<Action>(), null)};
     
     //tutorial + scoring
     public static bool isTutorial = true;
@@ -76,7 +77,7 @@ public class OrderSession : MonoBehaviour
         {
             Destroy(gameObject); 
         }
-        
+
     }
 
     void Start()
@@ -104,7 +105,12 @@ public class OrderSession : MonoBehaviour
         this.selectedRecipe = recipe;
     }
     
-    public void PotionDone()
+    public void CompletePotion()
+    {
+        Potion potion = new Potion(currPlayerActions, selectedRecipe);
+    }
+
+    public void SubmitPotion(Potion p)
     {
         //finished tutorial
         if (isTutorial)
@@ -112,16 +118,7 @@ public class OrderSession : MonoBehaviour
             isTutorial = false;
         }
         
-        //determines if the player chose the right recipe, given what the customer wanted (based on dialogue)
-        if (selectedRecipe.Equals(expectedRecipe))
-        {
-            //award points
-            score += selectedRecipe.ScoreRecipe(currPlayerActions);
-        }
-        else
-        {
-            score -= MAX_SCORE;
-        }
+        score += p.score(expectedRecipe);
         
         // determine if game over
          if (score < 0 || score >= WIN_SCORE)
