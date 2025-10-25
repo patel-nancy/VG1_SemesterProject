@@ -5,7 +5,7 @@ using UnityEngine;
 public class IngredientDrag : MonoBehaviour
 {
     
-    private bool dragging = false;
+    public bool dragging = true;
     private Vector2 offset;
     
     private Ingredient ingredient;
@@ -16,36 +16,23 @@ public class IngredientDrag : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         
         // TODO: generalize
-        if (gameObject.name.StartsWith("ingredients_0"))
+        if (gameObject.name.StartsWith("bat"))
         {
             ingredient = new Ingredient(IngredientName.Bat);
         }
-        else if (gameObject.name.StartsWith("ingredients_1"))
+        else if (gameObject.name.StartsWith("frog"))
         {
             ingredient = new Ingredient(IngredientName.Frog);
         }
-        else if (gameObject.name.StartsWith("ingredients_2"))
+        else if (gameObject.name.StartsWith("squirrel"))
         {
-            ingredient = new Ingredient(IngredientName.Eye);
+            ingredient = new Ingredient(IngredientName.Squirrel);
+        }
+        else if (gameObject.name.StartsWith("toad"))
+        {
+            ingredient = new Ingredient(IngredientName.Toad);
         }
 
-    }
-    
-    private void OnMouseDown()
-    {
-        dragging = true;
-        offset = transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private void OnMouseDrag()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = mousePosition + offset; 
-    }
-
-    private void OnMouseUp()
-    {
-        dragging = false;
     }
 
     void OnCollisionStay2D(Collision2D other)
@@ -56,10 +43,7 @@ public class IngredientDrag : MonoBehaviour
         Cauldron cauldron = other.gameObject.GetComponent<Cauldron>();
         if (cauldron)
         {
-            Debug.Log(ingredient.name);
-            OrderSession.instance.currPlayerActions.Add(new AddIngredientAction(ingredient)); 
-            // //TODO: need to see if this ingredient is a counter
-            
+            OrderSession.instance.AddAction(new AddIngredientAction(ingredient));
             Destroy(this.gameObject);
         }
     }

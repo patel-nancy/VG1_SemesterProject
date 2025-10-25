@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StirCauldronAction : Action
 {
-    private Stir stir;
+    public Stir stir;
 
     public StirCauldronAction(Stir stir)
     {
@@ -14,7 +14,7 @@ public class StirCauldronAction : Action
     
     public override String description()
     {
-        return $"Stir {stir.rotations} times";
+        return $"Stir {Mathf.Round(stir.rotations)} times";
     }
 
     public override bool Equals(Action action)
@@ -24,6 +24,11 @@ public class StirCauldronAction : Action
             return stir.Equals(other.stir);
         }
         return false;
+    }
+
+    public override float ToFloat()
+    {
+        return stir.rotations;
     }
 }
 

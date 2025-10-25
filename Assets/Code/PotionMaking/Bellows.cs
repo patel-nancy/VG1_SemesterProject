@@ -30,7 +30,7 @@ public class Bellows : MonoBehaviour
         if(fireHold.fire.duration != 0)
         {
             Debug.Log("Fire duration: " + fireHold.fire.duration);
-            OrderSession.instance.currPlayerActions.Add(new FireAction(fireHold.fire));
+            OrderSession.instance.AddAction(new FireAction(fireHold.fire));
             fireHold.fire = new Fire();
         }
     }

@@ -13,7 +13,7 @@ public class FireAction : Action
     
     public override string description()
     {
-        return $"Fire on for {fire.duration} seconds";
+        return $"Fire on for {Mathf.Round(fire.duration)} seconds";
     }
     
     public override bool Equals(Action action)
@@ -23,5 +23,10 @@ public class FireAction : Action
             return fire.Equals(other.fire);
         }
         return false;
+    }
+
+    public override float ToFloat()
+    {
+        return fire.duration;
     }
 }

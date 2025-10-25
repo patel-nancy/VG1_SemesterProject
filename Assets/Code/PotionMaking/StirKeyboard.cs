@@ -38,8 +38,7 @@ public class StirKeyboard : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
             Debug.Log("Rotations: " + stir.rotations);
-            OrderSession.instance.currPlayerActions.Add(new StirCauldronAction(stir));
-
+            OrderSession.instance.AddAction(new StirCauldronAction(stir));
             stir = new Stir();
         }
     }
