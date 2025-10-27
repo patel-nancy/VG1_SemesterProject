@@ -1900,7 +1900,7 @@ GameObject:
   - component: {fileID: 1173067279}
   - component: {fileID: 1173067278}
   m_Layer: 0
-  m_Name: IngredientsPanel
+  m_Name: PotionPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,9 +1915,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1173067275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 471de1c5d05cdb048bf03587f2d08e87, type: 3}
+  m_Script: {fileID: 11500000, guid: c63ad79fb7e97c2e69ce0c201a610c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  potionPrefab: {fileID: 8106492596154845574, guid: e67d9f130ee925de5af15ef8db48d67c, type: 3}
+  xOffset: 2
+  yOffset: 2
+  startPos: {x: 4.5, y: 2}
 --- !u!4 &1173067277
 Transform:
   m_ObjectHideFlags: 0
@@ -3622,6 +3626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   customerName: 
   score: 0
+  MAX_SCORE: 10
+  WIN_SCORE: 30
 --- !u!4 &2125812455
 Transform:
   m_ObjectHideFlags: 0
