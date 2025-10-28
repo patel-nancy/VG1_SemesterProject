@@ -1,66 +1,51 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI; 
 
 public class CustomerProfile : MonoBehaviour
 {
-    public string customerName;
+    public static CustomerProfile instance;
+    
     static readonly string[] Names = { "Agnes", "Mary", "Thomas", "John", "Martha" };
+    public GameObject[] spriteOptions;
 
-    public Sprite[] spriteOptions;
-
-    private SpriteRenderer spriteRenderer;
-    private Image uiImage;
-
-    private int lastSpriteIndex = -1;
-
-    void Awake()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>() ?? GetComponentInChildren<SpriteRenderer>(true);
-        uiImage        = GetComponent<Image>()          ?? GetComponentInChildren<Image>(true);
-
-        RandomizeProfile();
-    }
-
-    public void RandomizeProfile()
-    {
-        Debug.Log("[CustomerProfile] RandomizeProfile called");
-
-        // Randomize name
-        customerName = Names[Random.Range(0, Names.Length)];
-
-        if (spriteOptions == null || spriteOptions.Length == 0)
+    public string customerName;
+    public GameObject customer;
+    
+    void Awake() {
+        if (instance == null)
         {
-            Debug.LogWarning("[CustomerProfile] No sprites assigned.");
-            return;
-        }
-
-        int idx;
-        if (spriteOptions.Length == 1)
-        {
-            idx = 0;
+            instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            do
-            {
-                idx = Random.Range(0, spriteOptions.Length); 
-            } while (idx == lastSpriteIndex);
+            Destroy(gameObject); 
         }
 
-        var chosen = spriteOptions[idx];
-        if (chosen == null)
-        {
-            Debug.LogWarning("[CustomerProfile] Chosen sprite was null; check your array.");
-            return;
-        }
+    }
+    
+    void Start()
+    {
+        instance = this;
+    }
+    
+    public void GenerateCustomer()
+    {
+        // Randomize name
+        customerName = Names[Random.Range(0, Names.Length)];
+        
+        int idx = Random.Range(0, spriteOptions.Length);
+        customer = Instantiate(spriteOptions[idx], transform);
+    }
 
-        if (spriteRenderer != null)
-            spriteRenderer.sprite = chosen;
-        if (uiImage != null)
-            uiImage.sprite = chosen;
+    public void Hide()
+    {
+        customer.SetActive(false);
+    }
 
-        lastSpriteIndex = idx;
-
-        Debug.Log($"[CustomerProfile] Name: {customerName}, SpriteIndex: {idx}, Sprite: {chosen.name}");
+    public void Show()
+    {
+        customer.SetActive(true);
     }
 }

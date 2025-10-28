@@ -24,7 +24,7 @@ public class DoneBottle : MonoBehaviour
         {
             Destroy(this.gameObject);
             
-            OrderSession.instance.CompletePotion();
+            OrderSession.instance.SubmitPotion();
         }
     }
 }

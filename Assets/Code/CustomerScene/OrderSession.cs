@@ -14,10 +14,39 @@ public class OrderSession : MonoBehaviour
     public static OrderSession instance;
     
     //customer
-    public string customerName;
+    public Customer customer;
+    
+    //dialogues
+    public Dictionary<string, List<string>> dialogues = new Dictionary<string, List<string>>
+    {
+        {
+            "invisibility",
+            new List<string>
+            {
+                "There's a dragon guarding some treasure...I need to slip past it!",
+                "I want to listen to the president's secret meeting!"
+            }
+        },
+        {
+            "flying",
+            new List<string>
+            {
+                "My cat is stuck in tree!",
+                "The stairs to my house collapsed...I need another way to get up!"
+            }
+        },
+        {
+            "liquid_luck",
+            new List<string>
+            {
+                "I have an exam tomorrow that I need to pass!",
+                "I want to win the lottery today!"
+            }
+        }
+    };
     
     //recipes
-    public static Dictionary<string, Recipe> recipe_cookbook = new Dictionary<string, Recipe> { 
+    public Dictionary<string, Recipe> recipe_cookbook = new Dictionary<string, Recipe> { 
         {
             "invisibility", 
             new Recipe(
@@ -59,14 +88,18 @@ public class OrderSession : MonoBehaviour
     
     //potion making
     public List<Action> currPlayerActions = new List<Action>();
-    public List<Potion> completedPotions = new List<Potion> {new Potion(new List<Action>(), null), new Potion(new List<Action>(), null), new Potion(new List<Action>(), null)};
+    public List<Potion> completedPotions = new List<Potion>();
     
-    //tutorial + scoring
+    //tutorial / scene trakcing
     public static bool isTutorial = true;
+    public static bool isCustomerScoring = false; //true when on scene 1 and player is finished w potion
+    
+    //scoring
     public float score;
+    public float currPotionScore;
     public float MAX_SCORE = 10;
     public float WIN_SCORE = 30;
-
+    
     void Awake() {
         if (instance == null)
         {
@@ -83,7 +116,7 @@ public class OrderSession : MonoBehaviour
     void Start()
     {
         score = 0;
-        instance = this; //do i need this?
+        instance = this;
     }
 
     public static void RestartSession()
@@ -99,35 +132,31 @@ public class OrderSession : MonoBehaviour
         SceneManager.LoadScene("CustomerScene");
     }
     
-    //order = customer + recipe
-    public void SetOrder(string customerName, Recipe recipe) {
-        this.customerName = customerName;
+    public void SetRecipe(Recipe recipe) {
+        // this.customerName = customerName;
         this.selectedRecipe = recipe;
     }
     
-    public void CompletePotion()
-    {
-        Potion potion = new Potion(currPlayerActions, selectedRecipe);
-    }
 
-    public void SubmitPotion(Potion p)
+    public void SubmitPotion()
     {
-        //finished tutorial
-        if (isTutorial)
-        {
-            isTutorial = false;
-        }
-        
-        score += p.score(expectedRecipe);
+        Potion p = new Potion(currPlayerActions, selectedRecipe);
+        completedPotions.Add(p);
+
+        currPotionScore = p.score(expectedRecipe);
+        score += currPotionScore;
         
         // determine if game over
          if (score < 0 || score >= WIN_SCORE)
          {
              SceneManager.LoadScene("GameOver");
          }
-         else {
-           currPlayerActions.Clear();
-           SceneManager.LoadScene("CustomerScene");
+         else
+         {
+             isCustomerScoring = true;
+             currPlayerActions.Clear();
+               
+             SceneManager.LoadScene("CustomerScene");
          }
     }
 

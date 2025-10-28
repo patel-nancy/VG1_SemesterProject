@@ -9,26 +9,6 @@ public class Recipe
 {
     public String name;
     public List<Action> actions;
-
-    // public bool CheckRecipe(List<Action> playerActions)
-    // {
-    //     if (actions.Count != playerActions.Count)
-    //     {
-    //         Debug.Log("Expected Actions Count: " + actions.Count);
-    //         Debug.Log("Played Actions Count: " + playerActions.Count);
-    //         return false;
-    //     }
-    //     
-    //     for (int i = 0; i < playerActions.Count; i++)
-    //     {
-    //         if (!playerActions[i].Equals(actions[i])) //order matters
-    //         {
-    //             Debug.Log("NOT EQUAL! Player: " + playerActions[i].description() + "Action:" + actions[i].description());
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
     
     public float ScoreRecipe(List<Action> playerActions)
     {

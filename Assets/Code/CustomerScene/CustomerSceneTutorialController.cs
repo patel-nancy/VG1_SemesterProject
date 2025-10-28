@@ -20,15 +20,31 @@ public class CustomerSceneTutorialController : MonoBehaviour
         instance = this;
         if (OrderSession.isTutorial)
         {
-            tutorialCanvas.SetActive(true);
+            //customer ordering
+            if (!OrderSession.isCustomerScoring)
+            {    
+                tutorialCanvas.SetActive(true);
             
-            //reset all canvases
-            customerCanvas.SetActive(false);
-            dialogueCanvas.SetActive(false);
-            recipeOptionsCanvas.SetActive(false);
-            repromptCanvas.SetActive(false);
+                //reset all canvases
+                customerCanvas.SetActive(false);
+                dialogueCanvas.SetActive(false);
+                recipeOptionsCanvas.SetActive(false);
+                repromptCanvas.SetActive(false);
             
-            StartCoroutine("Tutorial");
+                StartCoroutine("OrderTutorial");
+            }
+            else
+            {
+                tutorialCanvas.SetActive(true);
+            
+                //reset all canvases
+                customerCanvas.SetActive(false);
+                dialogueCanvas.SetActive(false);
+                recipeOptionsCanvas.SetActive(false);
+                repromptCanvas.SetActive(false);
+                
+                StartCoroutine("ScoreTutorial");
+            }
         }
         else
         {
@@ -44,16 +60,18 @@ public class CustomerSceneTutorialController : MonoBehaviour
     private IEnumerator TutorialReprompt()
     {
         repromptCanvas.SetActive(true);
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //TODO: check this...should be space
         yield return new WaitUntil(() => Input.GetMouseButtonUp(0));
         repromptCanvas.SetActive(false);
     }
 
-    IEnumerator Tutorial()
+    IEnumerator OrderTutorial()
     {
         //tutorial mode:
         //do the invisibility recipe so that they can try all three types of actions (add ingredient, stir, fire)
-        OrderSession.instance.expectedRecipe = OrderSession.recipe_cookbook["invisibility"];
+        OrderSession.instance.expectedRecipe = OrderSession.instance.recipe_cookbook["invisibility"];
+        OrderSession.instance.customer = new Customer("Mary",
+            "I want to listen to the president's secret meeting! Make me a potion to do it!", 0);
         
         //highlight customer
         customerCanvas.SetActive(true);
@@ -73,5 +91,18 @@ public class CustomerSceneTutorialController : MonoBehaviour
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
         recipeOptionsCanvas.SetActive(false);
+    }
+
+    IEnumerator ScoreTutorial()
+    {
+        dialogueText.text = "Are you done?";
+        
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //TODO: finish
+        
+        //finished tutorial
+        if (OrderSession.isTutorial)
+        {
+            OrderSession.isTutorial = false;
+        }
     }
 }

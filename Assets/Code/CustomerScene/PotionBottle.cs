@@ -21,12 +21,11 @@ public class PotionBottle : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D other)
     {
-        Debug.Log("wow collision\n");
-        if (other.gameObject.GetComponent<CustomerProfile>())
+        if (other.gameObject.tag == "Customer")
         {
-            Destroy(this.gameObject);
+            CustomerController.instance.CustomerCheckPotion(OrderSession.instance.currPotionScore); //change dialogue to "check" potion
             
-            OrderSession.instance.CompletePotion();
+            Destroy(this.gameObject);
         }
     }
 }

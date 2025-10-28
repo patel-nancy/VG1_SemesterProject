@@ -15,9 +15,6 @@ public class Potion
 
     public float score(Recipe expectedRecipe)
     {
-        if (expectedRecipe.Equals(approximateRecipe))
-            return approximateRecipe.ScoreRecipe(actions);
-        else
-            return -OrderSession.instance.MAX_SCORE;
+        return approximateRecipe.ScoreRecipe(actions);
     }
 }
