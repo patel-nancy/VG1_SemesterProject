@@ -12,6 +12,9 @@ public class CustomerSceneTutorialController : MonoBehaviour
     public GameObject dialogueCanvas;
     public GameObject recipeOptionsCanvas;
     public GameObject repromptCanvas;
+    public GameObject potionPanelCanvas;
+    public GameObject scoringDialogueCanvas;
+    public GameObject newCustomerCanvas;
     
     [SerializeField] TMP_Text dialogueText;
     
@@ -24,25 +27,13 @@ public class CustomerSceneTutorialController : MonoBehaviour
             if (!OrderSession.isCustomerScoring)
             {    
                 tutorialCanvas.SetActive(true);
-            
-                //reset all canvases
-                customerCanvas.SetActive(false);
-                dialogueCanvas.SetActive(false);
-                recipeOptionsCanvas.SetActive(false);
-                repromptCanvas.SetActive(false);
-            
+                ResetCanvases();
                 StartCoroutine("OrderTutorial");
             }
             else
             {
                 tutorialCanvas.SetActive(true);
-            
-                //reset all canvases
-                customerCanvas.SetActive(false);
-                dialogueCanvas.SetActive(false);
-                recipeOptionsCanvas.SetActive(false);
-                repromptCanvas.SetActive(false);
-                
+                ResetCanvases();
                 StartCoroutine("ScoreTutorial");
             }
         }
@@ -52,6 +43,17 @@ public class CustomerSceneTutorialController : MonoBehaviour
         }
     }
 
+    public void ResetCanvases()
+    {
+        customerCanvas.SetActive(false);
+        dialogueCanvas.SetActive(false);
+        recipeOptionsCanvas.SetActive(false);
+        repromptCanvas.SetActive(false);
+        potionPanelCanvas.SetActive(false);
+        scoringDialogueCanvas.SetActive(false);
+        newCustomerCanvas.SetActive(false);
+    }
+    
     public void Reprompt()
     {
         StartCoroutine("TutorialReprompt");
@@ -95,9 +97,21 @@ public class CustomerSceneTutorialController : MonoBehaviour
 
     IEnumerator ScoreTutorial()
     {
-        dialogueText.text = "Are you done?";
+        dialogueText.text = "Are you done with my potion?";
+        potionPanelCanvas.SetActive(true);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
+        potionPanelCanvas.SetActive(false);
         
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0)); //TODO: finish
+        scoringDialogueCanvas.SetActive(true);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
+        scoringDialogueCanvas.SetActive(false);
+        
+        newCustomerCanvas.SetActive(true);
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.Space));
+        newCustomerCanvas.SetActive(false);
         
         //finished tutorial
         if (OrderSession.isTutorial)

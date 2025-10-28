@@ -54,7 +54,7 @@ public class CustomerController : MonoBehaviour
                 //ensure same prefab
                 if (c != null)
                 {
-                    dialogueText.text = "Are you done?";
+                    dialogueText.text = "Are you done with my potion?";
                     SetActivePrefab(c.prefab_idx);
                 }
             }
