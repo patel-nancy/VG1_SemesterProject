@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 //combine dialogue + sprite UI 
+// Basic UIfacing info about a customer 
 public class Customer
 {
    public string name;
