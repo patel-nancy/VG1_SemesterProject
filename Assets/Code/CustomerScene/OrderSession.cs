@@ -82,6 +82,10 @@ public class OrderSession : MonoBehaviour
             )
         }
     };
+
+    public List<string> recipe_names = new List<string>(){"invisibility", "flying", "liquid_luck"};
+
+    //
     
     public Recipe selectedRecipe; //the recipe the player picks
     public Recipe expectedRecipe; //the recipe we expect, based on the customer's dialogue
