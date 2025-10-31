@@ -8,7 +8,7 @@ public class CustomerController : MonoBehaviour
 {
     public static CustomerController instance;
     
-    readonly string[] names = { "Agnes", "Mary", "Thomas", "John", "Martha" };
+    readonly string[] random_name_selection = { "Agnes", "Mary", "Thomas", "John", "Martha", "Tom", "Josh" };
     [SerializeField] TMP_Text dialogueText;
     public GameObject[] prefabs;
     
@@ -114,7 +114,7 @@ public class CustomerController : MonoBehaviour
     public Customer GenerateCustomer()
     {
         //1. randomly choose name
-        string name = names[Random.Range(0, names.Length)];
+        string name = random_name_selection[Random.Range(0, random_name_selection.Length)];
         
         //2. randomly chose which potion to make (e.g. "flying")
         //given the randomly chosen potion, randomly chose which dialogue the customer  (e.g. "My cat is stuck in a tree")
